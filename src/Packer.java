@@ -64,7 +64,8 @@ public class Packer {
 
         for (File mdpiRes : fileList.get(MDPI)) {
             dest = new File(DEST_PATH + MDPI_SUBDIR + mdpiRes.getName());
-            if(!dest.exists()) Files.copy(mdpiRes.toPath(), dest.toPath());
+            if ((dest.exists())) dest.delete();
+            Files.copy(mdpiRes.toPath(), dest.toPath());
         }
 
 
@@ -73,7 +74,8 @@ public class Packer {
 
         for (File hdpiRes : fileList.get(HDPI)) {
             dest = new File(DEST_PATH + PROJECT_HDPI_SUBDIR + hdpiRes.getName());
-            if(!dest.exists()) Files.copy(hdpiRes.toPath(), dest.toPath());
+            if ((dest.exists())) dest.delete();
+            Files.copy(hdpiRes.toPath(), dest.toPath());
         }
 
 
@@ -82,7 +84,8 @@ public class Packer {
 
         for (File xhdpiRes : fileList.get(XHDPI)) {
             dest = new File(DEST_PATH + XHDPI_SUBDIR + xhdpiRes.getName());
-            if(!dest.exists()) Files.copy(xhdpiRes.toPath(), dest.toPath());
+            if ((dest.exists())) dest.delete();
+            Files.copy(xhdpiRes.toPath(), dest.toPath());
         }
 
 
@@ -91,22 +94,25 @@ public class Packer {
 
         for (File xxhdpiRes : fileList.get(XXHDPI)) {
             dest = new File(DEST_PATH + XXHDPI_SUBDIR + xxhdpiRes.getName());
-            if(!dest.exists()) Files.copy(xxhdpiRes.toPath(), dest.toPath());
+            if ((dest.exists())) dest.delete();
+            Files.copy(xxhdpiRes.toPath(), dest.toPath());
         }
     }
 
     public static void main(String args[]) {
         try {
+            echo("starting...");
             Packer p = new Packer();
             p.extractFiles();
             p.pasteFiles();
+            echo("done");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
 
-//    private void echo(String txt){
-//        System.out.println(txt);
-//    }
+    static void echo(String txt){
+        System.out.println(txt);
+    }
 }
